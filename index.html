@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        background-color: #cad6e5;
+        display: flex;
+        justify-content: center;
+        align-content: center;
+        padding-top: 100px;
+      }
+      main > div {
+        width: 400px;
+        border-radius: 5px;
+        background-color: antiquewhite;
+        position: relative;
+      }
+      main > div > div:nth-of-type(1) {
+        width: 100%;
+        height: 120px;
+        background: linear-gradient(#9e64f0, #af80f0);
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+        display: flex;
+        flex-wrap: wrap;
+        align-content: center;
+      }
+      main > div > div:nth-of-type(1) > h1,
+      main > div > div:nth-of-type(1) > p {
+        width: 100%;
+        height: 40px;
+        /* border: 1px solid pink; */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+        font-size: 12px;
+      }
+      main > div > div:nth-of-type(1) > p{
+        font-size: 20px;
+      }
+      main > div > div:nth-of-type(2) {
+        position: absolute;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background-color: #ff006e;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        font-size: 30px;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        cursor: pointer;
+      }
+      main > div > div:nth-of-type(3) {
+        width: 100%;
+        height: 80px;
+        background-color: #f7f7f7;
+        display: flex;
+        align-items: center;
+      }
+      main > div > div:nth-of-type(3) > input {
+        width: 100%;
+        height: 50px;
+        border: none;
+        color: #cbd6e8;
+        font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+        font-size: 24px;
+        text-align: center;
+        background-color: #f7f7f7;
+        outline: none;
+      }
+      main > div > div:nth-of-type(4) {
+        width: 100%;
+        height: 200px;
+        background-color: #fdfdfd;
+        padding: 15px;
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+      }
+      .note {
+        width: 160px;
+        height: 160px;
+        border-radius: 8px;
+        background-color: #fb5f15;
+        margin: 10px;
+        padding: 10px;
+        font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+        color: white;
+        font-size: 20px;
+        position: relative;
+      }
+      .del {
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+        visibility: hidden;
+        font-size: 50px;
+        cursor: pointer;
+      }
+      main > div > div:nth-of-type(4) > div:hover > span {
+        visibility: visible;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <div>
+        <div>
+          <h1></h1>
+          <p></p>
+        </div>
+        <div id="add" onclick="add()">+</div>
+        <div>
+          <input
+            type="text"
+            name=""
+            id=""
+            placeholder="what would you like to do today"
+          />
+        </div>
+        <div id="task"></div>
+      </div>
+    </main>
+  </body>
+  <script>
+    let count = 0;
+    let array = ["#ff006e", "#af80f0", "#fb5f15", "#FFC420", "#4B90FF"];
+    let _time = new Date();
+    _time.getDay
+    document.getElementsByTagName("h1")[0].innerText = _time;
+
+    function add() {
+      let _color = parseInt(Math.random(array) * array.length);
+      let _task = document.getElementById("task");
+      let _val = document.getElementsByTagName("input")[0];
+      if (_val.value == null || _val.value == "") {
+      } else {
+        let _child = document.createElement("div");
+        _child.classList.add("note");
+
+        _child.style.backgroundColor = array[_color];
+
+        _child.innerHTML = _val.value;
+
+        let _del = document.createElement("span");
+        _del.setAttribute("onclick", "delet(this)");
+        _del.classList.add("del");
+        _del.innerText = "-";
+        _child.appendChild(_del);
+        _task.appendChild(_child);
+        _task.style.height = "auto";
+        count++;
+        _val.value = "";
+        _val.focus();
+        print()
+      }
+    }
+
+    function delet(s) {
+      s.parentElement.remove();
+      count--;
+      print()
+    }
+    function print(){
+        document.getElementsByTagName("p")[0].innerText =
+          "you've got " + count + " thing to do today";
+    }
+  </script>
+</html>
